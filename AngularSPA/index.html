@@ -1,0 +1,57 @@
+<!-- index.html -->
+<!DOCTYPE html>
+
+<html ng-app="angularApp">
+
+
+<head>
+    <!-- LINKS -->
+    <!--Css, Bootstrap, fonts (primarily as backups)-->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+
+    <!-- SCRIPTS -->
+    <script src="js/jquery.min.js"></script>
+    <!-- load angular and angular route and animations all via CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/TweenMax.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-touch.min.js"></script>
+    <script src="js/script.js"></script>
+
+</head>
+
+
+<body ng-controller="mainController">
+
+<!-- HEADER AND NAVBAR -->
+<header>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand desktop" href="#home">DJ Walsh Angular SPA Demo</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <!--<li><a href="#home"><i class="fa fa-globe"></i> Home</a></li>-->
+                <li><a href="#home"> Home</a></li>
+                <!--<li><a href="#about"><i class="fa fa-user"></i> About</a></li>-->
+                <li><a href="#about"> About</a></li>
+                <!--<li><a href="#contact"><i class="fa fa-bookmark"></i> Contact</a></li>-->
+                <li><a href="#contact"> Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<!-- MAIN CONTENT AND INJECTED VIEWS -->
+<div id="main">
+
+    <div ng-view class="fade"></div>
+</div>
+
+</body>
+</html>
