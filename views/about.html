@@ -1,0 +1,77 @@
+<!-- about.html -->
+<div class="about">
+    <div class="jumbotron text-center">
+        <h1>About</h1>
+
+        <p>{{ message }}</p>
+    </div>
+
+
+    <div class="container slider">
+        <img ng-repeat="slide in slides" class="slide slide-animation nonDraggableImage"
+             ng-swipe-right="rightSlide()" ng-swipe-left="leftSlide()"
+             ng-hide="!isCurrentSlideIndex($index)" ng-src="{{slide.src}}">
+
+        <a class="arrow prev" href="" ng-click="rightSlide()"></a>
+        <a class="arrow next" href="" ng-click="leftSlide()"></a>
+        <nav class="nav">
+            <div class="wrapper">
+                <ul class="">
+                    <li class="" ng-repeat="slide in slides">
+                        <a href="" ng-class="{'active':isCurrentSlideIndex($index)}"
+                           ng-click="setCurrentSlideIndex($index);">{{slide.description}}</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!--<div class="container-fluid">-->
+        <!--<div class="row justify-content-center">-->
+            <!--<div class="col-xs-12">-->
+                <!--<div class="col-md-8 text-center">-->
+                        <!--<img ng-src="{{feature}}"/>-->
+                <!--</div>-->
+
+            <!--</div>-->
+        <!--</div>-->
+
+    <!--</div>-->
+
+    <!--<div class="container-fluid">-->
+        <!--<div class="row justify-content-center">-->
+            <!--<div class="col-xs-12">-->
+                <!--<div class="col-md-2 aboutPanel text-center">-->
+                    <!--<div ng-click="selectImage(gallery.id)">-->
+                        <!--<img ng-src="{{image1}}"/>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-2 aboutPanel text-center">-->
+                    <!--<div>-->
+                        <!--<img ng-src="{{image6}}"/>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-2 aboutPanel text-center">-->
+                    <!--<div>-->
+                        <!--<img ng-src="{{image2}}"/>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-2 aboutPanel text-center">-->
+                    <!--<div>-->
+                        <!--<img ng-src="{{image3}}"/>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-2 aboutPanel text-center">-->
+                    <!--<div>-->
+                        <!--<img ng-src="{{image4}}"/>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div ng-init="image5 = 'img/dylan-walsh-dolphins.jpg'" class="col-md-2 aboutPanel text-center">-->
+                    <!--<div>-->
+                        <!--<img ng-src="{{image5}}"/>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+            <!--</div>-->
+        <!--</div>-->
+
+    <!--</div>-->
+</div>
