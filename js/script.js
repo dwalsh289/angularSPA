@@ -1,7 +1,7 @@
 
 
 // this is the module
-var angularApp = angular.module('angularApp', ['ngRoute', 'ngAnimate']);
+var angularApp = angular.module('angularApp', ['ngRoute', 'ngAnimate', 'ui.directives', 'ngSanitize', 'angularApp.services']);
 
 // configure the routes for the different views
 angularApp.config(function($routeProvider) {
@@ -25,6 +25,11 @@ angularApp.config(function($routeProvider) {
             controller : 'contactController'
         })
 
+        .when('/twitter', {
+            templateUrl : 'views/twitter.html',
+            controller : 'twitterController'
+        })
+
         .otherwise({
             redirectTo : '/home'
         });
@@ -36,9 +41,16 @@ angularApp.controller('mainController', function($scope) {
 
 });
 
+angularApp.controller('twitterController', function($scope) {
+    $scope.message = 'Get you twitter fix here!';
+});
+
 angularApp.controller('aboutController', function($scope) {
-    $scope.message = 'A passion of mine is photography. Explore some of the shots from my year living abroad in Japan below.';
-    // $scope.feature = '';
+    // $scope.message = 'A passion of mine is photography. Explore some of the shots from my year living abroad in Japan below.';
+
+    $scope.setMessage = function(input) {
+        return $scope.currentIndex === 5 ? $scope.message = 'Thanks for looking at my photography!' :     $scope.message = 'A passion of mine is photography. Explore some of the shots from my year living abroad in Japan below.';
+    };
 
     $scope.slides = [{
         src: 'img/dylan-walsh-kobe-doggies.jpg',
@@ -57,37 +69,38 @@ angularApp.controller('aboutController', function($scope) {
         description: "Dolphins from the local aquarium in Hyogo Prefecture"
     }, {
         src: 'img/dylan-walsh-yakuza-cat.jpg',
-        description: "A steely cat"
+        description: "A steely cat",
     }];
 
     $scope.direction = 'left';
-    $scope.currentIndex = 0;
+    $scope.currentIndex = 1;
 
-    $scope.setCurrentSlideIndex = function (index) {
-        $scope.direction = (index > $scope.currentIndex) ? 'left' : 'right';
-        $scope.currentIndex = index;
-    };
+
 
     $scope.isCurrentSlideIndex = function (index) {
         return $scope.currentIndex === index;
     };
 
+    $scope.setCurrentSlideIndex = function (index) {
+        $scope.direction = (index > $scope.currentIndex) ? 'left' : 'right';
+        $scope.currentIndex = index;
+        console.log($scope.currentIndex);
+    };
+
+
     $scope.leftSlide = function () {
         $scope.direction = 'left';
         $scope.currentIndex = ($scope.currentIndex < $scope.slides.length - 1) ? ++$scope.currentIndex : 0;
+        console.log($scope.currentIndex);
     };
 
     $scope.rightSlide = function () {
         $scope.direction = 'right';
         $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.slides.length - 1;
+        console.log($scope.currentIndex);
     };
 
-    // $scope.image1 = 'img/dylan-walsh-kobe-doggies.jpg';
-    // $scope.image2 = 'img/dylan-walsh-himeji-castle.jpg';
-    // $scope.image3 = 'img/dylan-walsh-lawn-clippings.jpg';
-    // $scope.image4 = 'img/dylan-walsh-bride-to-be.jpg';
-    // // $scope.image5 = 'img/dylan-walsh-dolphins.jpg';
-    // $scope.image6 = 'img/dylan-walsh-yakuza-cat.jpg';
+
 
 })
 
@@ -127,8 +140,43 @@ angularApp.controller('aboutController', function($scope) {
     };
 });
 
-angularApp.controller('contactController', function($scope) {
-    $scope.message = 'Thanks for visiting my demo! Click through to learn more about me.';
+function detectBrowser() {
+    var useragent = navigator.userAgent;
+    var mapdiv = document.getElementById("map");
+
+    if (useragent.indexOf('iPhone') != -1 || useragent.indexOf('Android') != -1 ) {
+        mapdiv.style.width = '100%';
+        mapdiv.style.height = '100%';
+    } else {
+        mapdiv.style.width = '600px';
+        mapdiv.style.height = '800px';
+    }
+}
+
+angular.module('ui.filters', []);
+angular.module('ui.directives', []);
+angular.module('ui', [
+    'ui.filters',
+    'ui.directives'
+]).value('ui.config', {});
+
+angular.module('ui.directives', []).directive('googleMap', function () {
+    return {
+        template: '<iframe width="100%" height="350" frameborder="0" style="border:0"></iframe>',
+        restrict: 'E',
+        scope: {
+            pbcode: '='
+        },
+        link: function postLink(scope, element) {
+            var mapFrame = element.find("iframe");
+            if (scope.pbcode) {
+                mapFrame.attr('src', "https://www.google.com/maps/embed?pb=" + scope.pbcode);
+            }
+            else {
+                mapFrame.attr('src', '');
+            }
+        }
+    };
 });
 
 
